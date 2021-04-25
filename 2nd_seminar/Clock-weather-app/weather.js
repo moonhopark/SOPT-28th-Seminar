@@ -1,7 +1,8 @@
 const weatherTemperature = document.querySelector(".weather_temperature"),
   weatherMain = document.querySelector(".weather_main"),
   weatherTemps = document.querySelector(".weather_temps"),
-  weatherOthers = document.querySelector(".weather_others");
+  weatherOthers = document.querySelector(".weather_others"),
+  weatherIcon = document.querySelector(".weather_icon");
 
 const key = "854fea3df44c8f0dbef6a2195f868890";
 
@@ -19,6 +20,7 @@ function drawWeather(weather) {
       weatherOthers.innerHTML = `<span>Humidity:</span> ${weather.hum} % &nbsp;&nbsp;
       <span>Wind</span> ${weather.wind} m/s`;
     }
+    weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${weather.icon}@2x.png" alt="icon" />`;
 }
 
 const getWeatherData = async (lat, lon) => {
@@ -38,6 +40,7 @@ const getWeatherData = async (lat, lon) => {
     wind: weatherData.wind.speed,
     id: weatherData.weather[0].id,
     rain: weatherData.rain ? weatherData.rain["1h"] : null,
+    icon: weatherData.weather[0].icon,
   };
 
   drawWeather(weather);
