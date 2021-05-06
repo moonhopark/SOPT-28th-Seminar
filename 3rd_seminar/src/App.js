@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import Styled from 'styled-components';
 
 import SearchBar from './components/SearchBar';
-import ResultCard from './components/ResultCard';
 import { getUserData } from './lib/api';
+import Result from './components/Result';
 
 const MainWrap = Styled.div`
   display: flex;
@@ -15,17 +15,27 @@ const MainWrap = Styled.div`
 `;
 
 function App() {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState({
+    status: "idle",
+    data: null,
+  });
 
   const getUser = async (id) => {
-    const data = await getUserData(id);
-    setUserData(data);
+    setUserData({ ...userData, status: "pending" });
+    try {
+      const data = await getUserData(id);
+      if(data === null) throw Error;
+      setUserData({ status: "resolved", data: data });
+    } catch(e) {
+      setUserData({ status: "rejected", data: null});
+    }
+    
   }
 
   return (
     <MainWrap>
       <SearchBar getUser={getUser} />
-      <ResultCard userData={userData} />
+      <Result userData={userData} />
     </MainWrap>
   );
 }

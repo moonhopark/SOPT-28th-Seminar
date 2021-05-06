@@ -53,24 +53,24 @@ const ResultCardWrap = Styled.div`
   }
 `;
 
-const ResultCard = ({ userData }) => {
+const ResultCard = ({ data }) => {
   return (
-    userData && (
+    data && (
       <ResultCardWrap>
         <div className="result_card">
-          <img className="result_image" src={userData.avatar_url} alt="" />
-          <p className="result_name">{userData.name}</p>
-          <p className="result_id">{userData.login}</p>
-          <p className="result_bio">{userData.bio}</p>
+          <img className="result_image" src={data.avatar_url} alt="" />
+          <p className="result_name">{data.name}</p>
+          <p className="result_id">{data.login}</p>
+          <p className="result_bio">{data.bio}</p>
           <div className="result_list">
             <div className="list_title">
-              Followers<div className="list_content">{userData.followers}</div>
+              Followers<div className="list_content">{data.followers}</div>
             </div>
             <div className="list_title">
-              Following<div className="list_content">{userData.following}</div>
+              Following<div className="list_content">{data.following}</div>
             </div>
             <div className="list_title">
-              Repos<div className="list_content">{userData.public_repos}</div>
+              Repos<div className="list_content">{data.public_repos}</div>
             </div>
           </div>
         </div>
