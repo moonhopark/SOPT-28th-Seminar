@@ -1,4 +1,4 @@
-import Reacdt from 'react';
+import React from 'react';
 
 const Main = () => {
   return (
