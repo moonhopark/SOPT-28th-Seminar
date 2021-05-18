@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Main from './pages/Main';
@@ -8,12 +9,14 @@ import Title from './components/common/Title'
 import Footer from './components/common/Footer'
 
 function App() {
+
+
   return (
     <>
-      <MainHeader />
-      <Calendar />
-      <Title />
       <BrowserRouter>
+        <MainHeader />
+        <Calendar />
+        <Title />
         <Switch>
           <Route exact path="/" component={Main} />
           <Route path="/diary/:id" component={Diary} />
