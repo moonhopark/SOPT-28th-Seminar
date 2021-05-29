@@ -10,6 +10,9 @@ const CardWrap = Styled.div`
     height: 257px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
+    &:hover {
+      cursor: pointer;
+    }
     
     &__image {
       width: 220px;
@@ -103,7 +106,7 @@ const Card = ({ props }) => {
           <div className="card__top--date">{getDateFormat(date)}</div>
           <div className="card__top--weather">{weather}</div>
         </div>
-        <div className="card__title">{title}</div>
+        <div className="card__title">{title ? title : "제목 없음"}</div>
         <div className="card__tags">
           {tags.map((tag, index) => {
             return(

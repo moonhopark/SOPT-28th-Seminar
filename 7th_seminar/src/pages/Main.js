@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Styled from 'styled-components';
 
 import Card from '../components/main/Card';
+import NewCard from '../components/main/NewCard';
 import { getCardData } from '../lib/api';
 
 const MainWrap = Styled.div`
@@ -28,6 +29,13 @@ const Main = ({ year, month }) => {
         userData.map((data, index) => {
           return <Card key={index} props={data} />;
       })}
+      <NewCard 
+        rawData={rawData} 
+        year={year} 
+        month={month} 
+        setUserData={setUserData} 
+        id={userData ? userData.length + 1 : 1}
+      />
     </MainWrap>
   );
 };
