@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import Card from '../components/main/Card';
 import NewCard from '../components/main/NewCard';
@@ -11,7 +12,7 @@ const MainWrap = Styled.div`
   row-gap: 25px;
 `;
 
-const Main = ({ year, month }) => {
+const Main = ({ year, month, history }) => {
   const [userData, setUserData] = useState(null);
   const [rawData, setRawData] = useState(null);
 
@@ -27,7 +28,13 @@ const Main = ({ year, month }) => {
     <MainWrap>
       {userData &&
         userData.map((data, index) => {
-          return <Card key={index} props={data} />;
+          return (
+            <Card 
+              key={index} 
+              props={data} 
+              onClickFunc={() => history.push(`/diary/${data.id}`)} 
+            />
+          );
       })}
       <NewCard 
         rawData={rawData} 
@@ -40,4 +47,4 @@ const Main = ({ year, month }) => {
   );
 };
 
-export default Main;
+export default withRouter(Main);

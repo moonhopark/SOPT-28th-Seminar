@@ -31,8 +31,18 @@ function App() {
         />
         <Title />
         <Switch>
-          <Route exact path="/" component={() => <Main year={year} month={month} />} />
-          <Route path="/diary/:id" component={Diary} />
+          <Route 
+            exact 
+            path="/" 
+            component={() => <Main year={year} month={month} />} />
+          <Route 
+            exact 
+            path="/diary/:id" 
+            component={() => <Diary year={year} month={month}/>} />
+          <Route 
+            exact 
+            path="/diary/edit/:id" 
+            component={() => <Diary year={year} month={month} />} />
           <Route component={() => <div>Page Not found</div>} />
         </Switch>
       </BrowserRouter>

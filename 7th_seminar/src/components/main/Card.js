@@ -89,12 +89,12 @@ const getDateFormat = (date) => {
 };
 
 
-const Card = ({ props }) => {
+const Card = ({ props, onClickFunc }) => {
   const { date, title, image, weather, tags } = props;
 
   return (
     <CardWrap>
-      <div className="card">
+      <div className="card" onClick={onClickFunc}>
         <div className="card__image">
           {image ? (
             <img className="card__image--photo" src={image} alt="" />
