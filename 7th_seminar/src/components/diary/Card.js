@@ -37,11 +37,33 @@ const Card = ({ data, match }) => {
   const isReadOnly = match.path === '/diary/:id' ? true : false;
   const [state, setState] = useState(data);
 
+  const handleChange = (event) => {
+    const name = event.target.name;
+    setState({
+      ...state,
+      [name] : event.target.value,
+    });
+  };
+
   return (
     <CardWrap>
-      <CardHeader title={state.title} isReadOnly={isReadOnly} />
-      <CardInfo data={state} isReadOnly={isReadOnly}/>
-      <p>{state.text}</p>
+      <CardHeader 
+        title={state.title} 
+        isReadOnly={isReadOnly} 
+        handleChange = {handleChange}
+      />
+      <CardInfo
+        data={state}
+        isReadOnly = {isReadOnly}
+        handleChange = {handleChange}
+      />
+    <textarea
+      placeholder="오늘은 기록해 주세요"
+      readOnly={isReadOnly}
+      value={state.text}
+      name="text"
+      onChange={handleChange}
+    />
     </CardWrap>
   );
 };

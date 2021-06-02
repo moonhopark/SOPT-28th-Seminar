@@ -2,63 +2,11 @@ import React from 'react';
 import Styled from 'styled-components';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import {makeStyles, withStyles} from '@material-ui/core/styled';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 
 import EmptyImage from '../../assets/Image.svg';
 import Select from '../../assets/Select.svg';
-
-const getDateFormat = (date) => {
-  const year = parseInt(date / 10000);
-  const month = parseInt((date % 10000) / 100 );
-  const day = date % 100;
-  return `${year}년 ${month}월 ${day}일`;
-};
-
-const CardInfo = ({ data, isReadOnly }) => {
-  const classes = useStyles();
-  const {image, date, weather, tags, summary} = data;
-
-  return (
-    <CardInfoWrap>
-      <div className="info__photo">
-        <img src={image ? image : EmptyImage} width={image && "210px"} height={image && "210px"} alt="" />
-      </div>
-      <div className="info__date--wrap">
-        <p className="info__date"><span>날짜</span>{getDateFormat(date)}</p>
-        <span>날씨</span>{isReadOnly ? <input type="text" readOnly={isReadOnly} value={weather} placeholder="날씨를 선택해 주세요" /> : <FormControl>
-            <NativeSelect
-              className={classes.select}
-              value={weather}
-              name="weather"
-              onChange={handleChange}
-              input={<BootstrapInput />}
-            >
-              <option value="" disabled>
-                날씨를 선택해주세요
-              </option>
-              <option value={"맑음"}>맑음</option>
-              <option value={"구름"}>구름</option>
-              <option value={"흐림"}>흐림</option>
-              <option value={"비"}>비</option>
-              <option value={"눈"}>눈</option>
-              <option value={"바람"}>바람</option>
-            </NativeSelect>
-          </FormControl>
-          >
-        <div className="info__tags">
-          <span>태그</span>
-          {tags.length > 0 ? tags.map((tag, index) => {return (<div key={index} className="info__tags--tag">{tag}
-          </div>})) : <input type="text" readOnly={true} value="" placeholder="태그를 선택해 주세요" />}
-        </div>
-      </div>
-    </CardInfoWrap>
-  );
-};
-
-export default CardInfo;
-
-// material-ui 스타일 커스텀
 
 const useStyles = makeStyles({
   select: {
@@ -87,7 +35,97 @@ const BootstrapInput = withStyles((theme) => ({
   },
 }))(InputBase);
 
+const getDateFormat = (date) => {
+  const year = parseInt(date / 10000);
+  const month = parseInt((date % 10000) / 100 );
+  const day = date % 100;
+  return `${year}년 ${month}월 ${day}일`;
+};
 
+const CardInfo = ({ data, isReadOnly, handleChange }) => {
+  const classes = useStyles();
+  const { image, date, weather, tags, summary } = data;
+
+  return (
+    <CardInfoWrap>
+      <div className="info__photo">
+        <img 
+          src={image ? image : EmptyImage} 
+          width={image && "210px"} 
+          height={image && "210px"} 
+          alt="" 
+        />
+      </div>
+      <div className="info__date--wrap">
+        <p className="info__date">
+          <span>날짜</span>
+          {getDateFormat(date)}
+        </p>
+        <span>날씨</span>
+        {isReadOnly ? (
+          <input 
+            type="text" 
+            readOnly={isReadOnly} 
+            value={weather} 
+            placeholder="날씨를 선택해 주세요" 
+          /> 
+        ) : (
+          <FormControl>
+            <NativeSelect
+              className={classes.select}
+              value={weather}
+              name="weather"
+              onChange={handleChange}
+              input={<BootstrapInput />}
+            >
+              <option value="" disabled>
+                날씨를 선택해주세요
+              </option>
+              <option value={"맑음"}>맑음</option>
+              <option value={"구름"}>구름</option>
+              <option value={"흐림"}>흐림</option>
+              <option value={"비"}>비</option>
+              <option value={"눈"}>눈</option>
+              <option value={"바람"}>바람</option>
+            </NativeSelect>
+          </FormControl>
+        )}
+        <div className="info__tags">
+          <span>태그</span>
+          {tags.length > 0 ? (
+            tags.map((tag, index) => {
+              return (
+                <div key={index} className="info__tags--tag">
+                  {tag}
+                </div>
+              );
+            })
+          ) : (
+            <input 
+              type="text" 
+              readOnly={true} 
+              value="" 
+              placeholder="태그를 선택해 주세요" 
+            />
+          )}
+        </div>
+        <span>한 줄 요약</span>
+        <input 
+          className="info__summary"
+          type="text"
+          name="summary"
+          placeholder="입력해주세요"
+          value={summary}
+          onChange={handleChange}
+          readOnly={isReadOnly}
+          style={{ backgroundColor: isReadOnly ? "white" : "#EFEFEF" }}
+        />
+      </div>
+    </CardInfoWrap>
+  );
+};
+
+export default CardInfo;
 
 // styled-components
 

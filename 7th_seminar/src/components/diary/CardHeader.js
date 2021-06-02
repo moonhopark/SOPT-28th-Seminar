@@ -1,15 +1,17 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-const CardHear = ({ title, isReadOnly }) => {
+const CardHear = ({ title, isReadOnly, handleChange }) => {
   return (
     <CardHeaderWrap>
       <input 
         type="text" 
+        name="title"
         className="header__title" 
         placeholder="제목을 입력해 주세요" 
         value={title} 
         readOnly={isReadOnly} 
+        onChange = {handleChange}
       />
       <div className="header__empty"></div>
       <button className="header__edit">수정</button>
