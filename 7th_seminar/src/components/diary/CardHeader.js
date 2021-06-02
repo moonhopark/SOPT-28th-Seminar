@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
-const CardHear = ({ title, isReadOnly, handleChange, handleEdit, match, history }) => {
+const CardHeader = ({ title, isReadOnly, handleChange, handleEdit, match, history, handleDelete }) => {
   const id = match.params.id;
 
   return (
@@ -27,12 +27,18 @@ const CardHear = ({ title, isReadOnly, handleChange, handleEdit, match, history 
       ) : (
         <button className="header__edit" onClick={handleEdit}>완료</button>
       )}
-      {isReadOnly ? <button className="header__delete">삭제</button> : "" }
+      {isReadOnly ? (
+        <button className="header__delete" onClick={handleDelete}>
+          삭제
+        </button> 
+      ) : (
+        "" 
+      )}
     </CardHeaderWrap>
   );
 };
 
-export default withRouter(CardHear);
+export default withRouter(CardHeader);
 
 const CardHeaderWrap = Styled.div`
   display: flex;
