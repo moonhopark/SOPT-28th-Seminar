@@ -1,4 +1,3 @@
-  
 {
   "posts": {
     "data": {
@@ -76,12 +75,12 @@
             "date": 20210502,
             "title": "다이어리 제목 어쩌고 저쩌고",
             "image": "https://i1.sndcdn.com/avatars-000600452151-38sfei-t500x500.jpg",
-            "weather": "바람",
+            "weather": "비",
             "tags": [
               "태그3"
             ],
             "summary": "ㅎㅅㅎ",
-            "text": "ㅎㅎㅎ"
+            "text": "ㅂㅂㅂ"
           },
           {
             "id": 3,
@@ -136,7 +135,18 @@
             "text": ""
           }
         ],
-        [],
+        [
+          {
+            "id": 1,
+            "date": 20210602,
+            "title": "",
+            "image": "",
+            "weather": "",
+            "tags": [],
+            "summary": "",
+            "text": ""
+          }
+        ],
         [],
         [],
         [],

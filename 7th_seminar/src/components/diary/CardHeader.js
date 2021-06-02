@@ -1,7 +1,10 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
-const CardHear = ({ title, isReadOnly, handleChange }) => {
+const CardHear = ({ title, isReadOnly, handleChange, handleEdit, match, history }) => {
+  const id = match.params.id;
+
   return (
     <CardHeaderWrap>
       <input 
@@ -12,16 +15,24 @@ const CardHear = ({ title, isReadOnly, handleChange }) => {
         value={title} 
         readOnly={isReadOnly} 
         onChange = {handleChange}
-      />
+      /> 
       <div className="header__empty"></div>
-      <button className="header__edit">수정</button>
-      <button className="header__delete">삭제</button>
-      
+      {isReadOnly ? (
+        <button 
+          className="header__edit"
+          onClick={() => history.push(`/diary/edit/${id}`)}
+          >
+          수정
+        </button>
+      ) : (
+        <button className="header__edit" onClick={handleEdit}>완료</button>
+      )}
+      {isReadOnly ? <button className="header__delete">삭제</button> : "" }
     </CardHeaderWrap>
   );
 };
 
-export default CardHear;
+export default withRouter(CardHear);
 
 const CardHeaderWrap = Styled.div`
   display: flex;
